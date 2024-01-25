@@ -19,6 +19,10 @@ WORKDIR=${SRCDIR:-/src}
 
 SPEC_FILE=${4:-*.spec}
 
+# Lets have some fun with Python
+# Get around WINE not implementing CopyFile2...
+sed -i 's/if hasattr(_winapi, "CopyFile2"):/if False:/g' /wine/drive_c/Python3/Lib/shutil.py
+
 python -m pip install --upgrade pip wheel setuptools
 
 #
